@@ -5,6 +5,11 @@
     src: url(fonts/sansita-one.regular.ttf);
 }
 
+@font-face {
+    font-family: "nackonen.black.otf";
+    src: url(fonts/nackonen.black.otf);
+}
+
 html {
     margin: 0;
     height: 100%;
