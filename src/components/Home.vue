@@ -7,11 +7,12 @@
                         <div class="bg-dark text-white d-flex flex-column shadow-lg rounded-5 py-4">
                             <div class="d-flex justify-content-center">
                                 <figure id="icon" class="d-flex justify-content-center">
-                                    <img src="favicon.png" alt="bi-megaphone-fill" class="home-icon img-fluid p-2">
+                                    <img src="/images/favicon.png" alt="bi-megaphone-fill"
+                                        class="home-icon img-fluid p-2">
                                 </figure>
                             </div>
                             <div class="d-flex">
-                                <img id="tatava" src="images/tatava.png" alt="Tatava!" class="img-fluid px-4" />
+                                <img id="tatava" src="/images/tatava.png" alt="Tatava!" class="img-fluid px-4" />
                             </div>
                             <div class="d-flex justify-content-center text-center">
                                 <p id="quote" class="fs-4 funky-text text-dark m-4">Geyik muhabbetin dibine vurmaya
