@@ -57,7 +57,8 @@ const cameraTurnedOn = ref(false);
 async function join_game() {
     if (codeData.value.startsWith('https://tatava.buzl.uk/join/')) {
         let id = codeData.value.split('/').pop();
-        video.pause();
+        video.srcObject.getTracks().forEach(track => track.stop());
+        cameraTurnedOn.value = false;
         _hide();
         router.push("/join/" + id);
     }

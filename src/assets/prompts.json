@@ -1,8 +1,238 @@
 {
-    "prompts": [
+    "single": [
         {
             "type": "text",
             "content": "Evet anne, okuldan uzaklaştırma yedim, çünkü ____________."
+        },
+        {
+            "type": "text",
+            "content": "Kütüphanede domates keserken yakalandım ve dedim ki: ____________"
+        },
+        {
+            "type": "text",
+            "content": "Kraliçe Elizabeth ölmeden önce dedi ki: ____________"
+        },
+        {
+            "type": "text",
+            "content": "Hayatta başarının sırrı ____________."
+        },
+        {
+            "type": "text",
+            "content": "Piramitler aslında şu yüzden inşa edildi: ____________."
+        },
+        {
+            "type": "text",
+            "content": "Dünyanın aslında 8 harikası var ve o da: ____________."
+        },
+        {
+            "type": "text",
+            "content": "Instagram'da en çok takip ettiğim şey: ____________."
+        },
+        {
+            "type": "text",
+            "content": "Hayatım bir kutu oyunu olsaydı, ____________."
+        },
+        {
+            "type": "text",
+            "content": "____________ ama Silivri soğuktur şimdi."
+        },
+        {
+            "type": "text",
+            "content": "____________ ama benim için biraz fazla."
+        },
+        {
+            "type": "text",
+            "content": "En büyük korkum başıma geldi, ____________"
+        },
+        {
+            "type": "image",
+            "content": "Galerimdeki en saçma şey:"
+        },
+        {
+            "type": "image",
+            "content": "Bu resimdeki detayı gördükten sonra Finlandiyalı bir anne akıl sağlığını kaybedip hastaneye kaldırıldı:"
+        },
+        {
+            "type": "text",
+            "content": "Önemli olan para değil, ____________"
+        },
+        {
+            "type": "text",
+            "content": "Gurbetçi bavulunun içinde gerçekten de ____________ mı var??"
+        },
+        {
+            "type": "text",
+            "content": "Türkiye cennet, biz Almanya'da ____________"
+        },
+        {
+            "type": "text",
+            "content": "Sinirini kendine sakla, ben şahsen ____________"
+        },
+        {
+            "type": "text",
+            "content": "Kalbini kırmak istemem ama ____________"
+        },
+        {
+            "type": "text",
+            "content": "Steam'de 8000+ saatimi harcadığım oyun ____________"
+        },
+        {
+            "type": "text",
+            "content": "Van Gölü Canavarı gerçek ve o ____________"
+        },
+        {
+            "type": "text",
+            "content": "Bence sanat dediğin ____________"
+        },
+        {
+            "type": "text",
+            "content": "____________ tüm mesele bu."
+        },
+        {
+            "type": "text",
+            "content": "Kalbini kırmak istemem ama ____________"
+        },
+        {
+            "type": "text",
+            "content": "____________ bu dünyada para eden biricik iştir."
+        },
+        {
+            "type": "text",
+            "content": "Çekirge, daha yolun başındasın ama ____________"
+        },
+        {
+            "type": "text",
+            "content": "Uyurken ____________ ve yataktan fırladım."
+        },
+        {
+            "type": "text",
+            "content": "Dün rüyamda ____________"
+        },
+        {
+            "type": "text",
+            "content": "Christopher Nolan'ın yeni filmi ____________"
+        },
+        {
+            "type": "text",
+            "content": "____________ bilmeyen de köylü orospu çocuğudur."
+        },
+        {
+            "type": "text",
+            "content": "____________ kim ve ona neden inanmalıyım?"
+        },
+        {
+            "type": "text",
+            "content": "İnsanın gerçek atası ____________"
+        },
+        {
+            "type": "text",
+            "content": "Asla ____________ yapamam."
+        },
+        {
+            "type": "text",
+            "content": "Kim bilir, belki ____________"
+        },
+        {
+            "type": "text",
+            "content": "Tokyo'da yapılacak yeni fuarın teması: ____________"
+        },
+        {
+            "type": "text",
+            "content": "Yıl olmuş 2042, sen hala ____________"
+        },
+        {
+            "type": "text",
+            "content": "Annem hep derdi ki ____________, evet haklıydı."
+        },
+        {
+            "type": "text",
+            "content": "Lovebombing, gaslighting, gatekeeping, ____________"
+        },
+        {
+            "type": "text",
+            "content": "Cennetin basamaklarını ____________ ile çıkamazsın."
+        },
+        {
+            "type": "text",
+            "content": "Ne yaparsan yap, yine de ____________"
+        },
+        {
+            "type": "text",
+            "content": "____________, sana zeki olmadıklarını söylemiştim."
+        },
+        {
+            "type": "text",
+            "content": "55 yıldır konuşmayan adam sonunda sessizliğini bozdu ve dedi ki: ____________"
+        },
+        {
+            "type": "text",
+            "content": "Paran mı yok? O zaman ____________"
+        },
+        {
+            "type": "text",
+            "content": "Siz hala uyuyun, ben ____________"
+        },
+        {
+            "type": "text",
+            "content": "Biz hiç mutluluktan ağlamadık, biz ____________"
+        },
+        {
+            "type": "text",
+            "content": "Hayırdır oğlim,  ____________"
+        },
+        {
+            "type": "text",
+            "content": "____________, ben biraz farklıyım galiba."
+        },
+        {
+            "type": "text",
+            "content": "Beni hayata döndürmek için tek bir şey söyle: ____________"
+        },
+        {
+            "type": "text",
+            "content": "Üstad Necip Fazıl'ın 'Osmanlı küçük devlettir.' diyen gence tokat gibi cevabı: ____________"
+        },
+        {
+            "type": "text",
+            "content": "Christopher Nolan'ın yeni filmi ____________"
+        }
+    ],
+    "triple": [
+        {
+            "type": "text",
+            "content": "Sınav haftası yapılmaması gereken 3 şey:"
+        },
+        {
+            "type": "text",
+            "content": "Seks sırasında söylenmemesi gereken 3 şey:"
+        },
+        {
+            "type": "text",
+            "content": "Marksist leninist yolunda anal temizlik için uyulmaması gereken 486 kuraldan 3'ü:"
+        },
+        {
+            "type": "text",
+            "content": "Okulun ilk günü karşılaşacağın 3 olay:"
+        },
+        {
+            "type": "text",
+            "content": "Üniversitenin ilk günü seni havalı yapacak 3 şey:"
+        },
+        {
+            "type": "text",
+            "content": "Libidonuzu yükseltecek 3 şey:"
+        },
+        {
+            "type": "text",
+            "content": "Ben Türk'üm diye bağıran 3 şey:"
+        },
+        {
+            "type": "text",
+            "content": "Sevdiğin kızı/erkeği etkilemenin 3 yolu:"
+        },
+        {
+            "type": "text",
+            "content": "Kalp kıran 3 söz:"
         }
     ]
 }

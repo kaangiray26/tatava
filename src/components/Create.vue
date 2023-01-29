@@ -51,7 +51,7 @@
                         <button class="btn btn-dark" @click="start_game">Start</button>
                     </div>
                     <div v-if="show_alert" class="alert alert-danger appear m-0 mt-2" role="alert">
-                        You need at least 1 player to start the game.
+                        You need at least 2 players to start the game.
                     </div>
                 </div>
             </div>
@@ -76,7 +76,7 @@ async function start_game() {
     show_alert.value = false;
     await nextTick();
 
-    if (store.peer_list.length < 1) {
+    if (store.peer_list.length < 2) {
         show_alert.value = true;
         return;
     }

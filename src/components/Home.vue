@@ -11,7 +11,7 @@
                                         class="home-icon img-fluid p-2">
                                 </figure>
                             </div>
-                            <div class="d-flex">
+                            <div class="d-flex justify-content-center">
                                 <img id="tatava" src="/images/tatava.png" alt="Tatava!" class="img-fluid px-4" />
                             </div>
                             <div class="d-flex justify-content-center text-center">
