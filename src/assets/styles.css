@@ -90,3 +90,24 @@ body {
 .funky-text {
     font-family: "sansita-one.regular.ttf";
 }
+
+.appear {
+    animation-name: appear_animation;
+    animation-duration: 1s;
+}
+
+@keyframes appear_animation {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.answered {
+    background-color: #B56576;
+    color: white;
+    font-weight: bolder;
+}

@@ -32,17 +32,26 @@
                     </div>
                     <hr />
                     <div class="collapse my-2" id="collapsedPeerList">
-                        <div class="card card-body">
-                            Some placeholder content for the collapse component. This panel is hidden by default but
-                            revealed when the user activates the relevant trigger.
+                        <div class="overflow-scroll">
+                            <span class="fw-bold">Players</span>
+                            <ul class="list-group list-group-numbered">
+                                <li class="list-group-item me-1" v-for="peer in store.peer_list">
+                                    <span class="text-bg-dark rounded fw-bold p-1">
+                                        {{ peer.name }}
+                                    </span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="d-flex justify-content-between">
                         <button type="button" class="btn btn-dark" data-bs-toggle="collapse"
-                            data-bs-target="#collapsedPeerList" @click="showPeerList">
-                            Joined: <span class="badge text-bg-light">{{ store.peerList.length }}</span>
+                            data-bs-target="#collapsedPeerList">
+                            Joined: <span class="badge text-bg-light">{{ store.peer_list.length }}</span>
                         </button>
-                        <button class="btn btn-dark">Start</button>
+                        <button class="btn btn-dark" @click="start_game">Start</button>
+                    </div>
+                    <div v-if="show_alert" class="alert alert-danger appear m-0 mt-2" role="alert">
+                        You need at least 1 player to start the game.
                     </div>
                 </div>
             </div>
@@ -52,15 +61,27 @@
 
 <script setup>
 import { ref, onMounted, nextTick } from 'vue';
+import { useRouter } from 'vue-router';
 import { Modal } from 'bootstrap';
 import { store } from "/js/store.js";
+
+const router = useRouter();
 
 const modal = ref(null);
 const join_link = ref(null);
 const peer_loaded = ref(false);
+const show_alert = ref(false);
 
-async function showPeerList() {
-    //
+async function start_game() {
+    show_alert.value = false;
+    await nextTick();
+
+    if (store.peer_list.length < 1) {
+        show_alert.value = true;
+        return;
+    }
+    _hide();
+    router.push("/game");
 }
 
 async function copyJoinLink() {

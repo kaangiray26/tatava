@@ -6,9 +6,19 @@ async function peer_opened() {
 }
 
 const store = reactive({
-    peer: null,
-    peerId: null,
-    peerList: [],
+    round: 0,
+    role: null,
+    name: null,
+    peer_id: null,
+    host_id: null,
+    peer_list: [],
+    peer_names: [],
+    game_started: false,
+    answers: [
+        [],
+        [],
+        []
+    ],
 });
 
 export { store, peer_opened }
