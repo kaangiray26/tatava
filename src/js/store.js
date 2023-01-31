@@ -12,7 +12,6 @@ async function is_round_finished() {
 }
 
 async function is_voting_finished() {
-    console.log(store.voted, store.peer_names.length)
     if (store.voted == (store.peer_names.length * (store.peer_names.length - 2))) {
         window.dispatchEvent(new CustomEvent('voting_finished'));
     }
@@ -31,6 +30,7 @@ const store = reactive({
     voted: 0,
     role: null,
     name: null,
+    winner: null,
     peer_id: null,
     host_id: null,
     peer_list: [],

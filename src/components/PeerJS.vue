@@ -20,8 +20,9 @@ onMounted(() => {
             // New guest joined
             if (data.type == "join") {
                 store.peer_list.push({
-                    name: data.name,
-                    conn: connection
+                    "name": data.name,
+                    "conn": connection,
+                    "score": 0,
                 });
                 return
             }

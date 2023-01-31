@@ -65,6 +65,7 @@ async function send_answer() {
     // Hide modal if last prompt
     if (index.value == items.value.length - 1) {
         _hide();
+        loaded.value = false;
         return
     }
     index.value++;
@@ -87,10 +88,15 @@ function _add_prompt(_prompt, _index) {
     })
 }
 
+function _reset() {
+    items.value = [];
+}
+
 defineExpose({
     show: _show,
     hide: _hide,
-    add_prompt: _add_prompt
+    add_prompt: _add_prompt,
+    reset: _reset,
 })
 
 onMounted(() => {

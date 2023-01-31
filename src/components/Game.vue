@@ -14,10 +14,14 @@
 
     <div v-if="store.game_started">
         <ul class="list-group">
-            <li class="list-group-item bg-dark text-white">Round {{ store.round + 1 }}</li>
+            <li class="list-group-item bg-dark">
+                <h5 class="funky-text fw-bold text-white mb-0">Round {{ store.round + 1 }}</h5>
+            </li>
             <li class="list-group-item" :class="{ 'answered': hasAnswered(name) }" v-for="name in store.peer_names">
-                <span class="bi bi-person-circle me-1"></span>
-                <span>{{ name }}</span>
+                <div class="d-inline-flex bg-dark text-white rounded px-1">
+                    <span class="bi bi-person-circle me-1"></span>
+                    <span>{{ name }}</span>
+                </div>
             </li>
         </ul>
     </div>
@@ -26,6 +30,9 @@
     <guestIntro ref="guest_intro" @connect_as_guest="connect_as_guest" />
     <Prompt ref="prompt" @send_answer="send_answer" />
     <Vote ref="vote" @send_vote="send_vote" />
+    <Score ref="score" @closed="score_closed" />
+    <NextRound ref="next_round" @start_next_round="start_next_round" />
+    <Finish ref="finish" />
 </template>
 
 <script setup>
@@ -33,10 +40,14 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { store, is_round_finished, notify_peers, is_voting_finished } from "/js/store.js";
 import { single, triple } from "/assets/prompts.json";
+
 import hostIntro from './hostIntro.vue';
 import guestIntro from './guestIntro.vue';
 import Prompt from './Prompt.vue';
 import Vote from './Vote.vue';
+import Score from './Score.vue';
+import NextRound from './NextRound.vue';
+import Finish from './Finish.vue';
 
 const router = useRouter();
 
@@ -45,6 +56,9 @@ const guest_intro = ref(null);
 
 const prompt = ref(null);
 const vote = ref(null);
+const score = ref(null);
+const next_round = ref(null);
+const finish = ref(null);
 
 const guest_conn = ref(null);
 
@@ -89,7 +103,12 @@ function hasAnswered(name) {
 }
 
 async function round_1() {
-    store.round = 0;
+    console.log(store);
+    // Reset
+    notify_peers({
+        type: "reset",
+    })
+    reset_round();
 
     // Create groups for the first round
     createGroups(single);
@@ -119,11 +138,52 @@ async function round_1() {
     prompt.value.show();
 }
 
+async function round_2() {
+    round_1();
+}
+
+async function round_3() {
+    round_1();
+    // // Reset
+    // notify_peers({
+    //     type: "reset",
+    // })
+    // reset_round();
+
+    // // Create groups for the first round
+    // createGroups(triple);
+
+    // // Send prompts to group members
+    // for (let i = 0; i < store.groups.length; i++) {
+    //     let group = store.groups[i];
+    //     for (let j = 0; j < 2; j++) {
+    //         // Skip if peer is the host
+    //         if (group.peers[j] == store.name) {
+    //             prompt.value.add_prompt(group.prompt, group.index);
+    //             continue;
+    //         }
+    //         // Find peer and send prompt
+    //         let peer = store.peer_list.find(peer => peer.name == group.peers[j]);
+    //         peer.conn.send({
+    //             type: "prompt",
+    //             prompt: group.prompt,
+    //             round: store.round,
+    //             index: group.index
+    //         })
+    //     }
+    // }
+    // notify_peers({
+    //     type: "show_prompts",
+    // });
+    // prompt.value.show();
+}
+
 async function connect_as_host(name) {
     store.name = name;
     store.peer_list.unshift({
         "name": store.name,
         "conn": null,
+        "score": 0,
     });
 
     store.peer_names = store.peer_list.map(peer => peer.name);
@@ -132,8 +192,9 @@ async function connect_as_host(name) {
         names: store.peer_names,
     })
 
+    store.round = 0;
     store.game_started = true;
-    await round_1();
+    round_1();
 }
 
 async function connect_as_guest(name) {
@@ -151,6 +212,11 @@ async function connect_as_guest(name) {
         if (data.type == "start") {
             store.game_started = true;
             store.peer_names = data.names;
+            return
+        }
+
+        if (data.type == "reset") {
+            reset_round();
             return
         }
 
@@ -175,10 +241,21 @@ async function connect_as_guest(name) {
             return
         }
 
+        if (data.type == "scores") {
+            score.value.set_scores(data.scores);
+            score.value.show();
+            return
+        }
+
         if (data.type == "answered") {
             store.answered.push({
                 "name": data.name,
             });
+            return
+        }
+
+        if (data.type == "finished") {
+            finish.value.show();
             return
         }
     });
@@ -256,9 +333,85 @@ async function start_voting() {
 
 async function end_voting() {
     console.log("Voting ended!");
-    console.log(store.groups);
 
     // Calculate scores
+    for (let i = 0; i < store.groups.length; i++) {
+        let group = store.groups[i];
+
+        // Votes are equal
+        if (group.votes[0] == group.votes[1]) {
+            let peers = store.peer_list.filter(peer => group.peers.includes(peer.name));
+            peers.forEach(peer => peer.score += 100);
+            continue;
+        }
+
+        // One got all the votes
+        if (group.votes.some(vote => vote == 0)) {
+            let index = group.votes.findIndex(vote => vote != 0);
+            let peer = store.peer_list.find(peer => peer.name == group.peers[index]);
+            peer.score += 200;
+            continue;
+        }
+
+        // Votes are distributed
+        let total_votes = group.votes.reduce((a, b) => a + b, 0);
+        for (let j = 0; j < group.peers.length; j++) {
+            let peer = store.peer_list.find(peer => peer.name == group.peers[j]);
+            peer.score += 200 * (group.votes[j] / total_votes);
+        }
+    }
+
+    // Output scores
+    let scores = store.peer_list.map(peer => {
+        return {
+            "name": peer.name,
+            "score": peer.score,
+        }
+    });
+
+    // Notify and show scores
+    notify_peers({
+        type: "scores",
+        scores: scores
+    });
+
+    if (store.round == 2) {
+        notify_peers({
+            type: "finished",
+        });
+        finish.value.show();
+        return
+    }
+
+    score.value.set_scores(scores);
+    score.value.show();
+}
+
+async function start_next_round() {
+    store.round += 1;
+
+    if (store.round == 1) {
+        round_2();
+        return
+    }
+
+    if (store.round == 2) {
+        round_3();
+    }
+}
+
+async function score_closed() {
+    if (store.winner != null && store.role == "host") {
+        next_round.value.show();
+    }
+}
+
+function reset_round() {
+    store.voted = 0;
+    store.answered = [];
+    prompt.value.reset();
+    vote.value.reset();
+    score.value.hide();
 }
 
 onMounted(() => {
